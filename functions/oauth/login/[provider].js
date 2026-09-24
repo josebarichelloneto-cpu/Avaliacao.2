@@ -1,1 +1,2 @@
+GET  /oauth/login/google
 
