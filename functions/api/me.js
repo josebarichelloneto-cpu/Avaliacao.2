@@ -1,1 +1,1 @@
-
+GET  /api/me
