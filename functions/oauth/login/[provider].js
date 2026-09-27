@@ -1,5 +1,5 @@
-GET  /oauth/login/google
-GET  /oauth/login/github
+//GET  /oauth/login/google
+//GET  /oauth/login/github
 
 import { generateRandomToken, sha256Base64Url } from "../../_shared/crypto.js";
 import { PROVIDERS, isSupportedProvider } from "../../_shared/providers.js";
