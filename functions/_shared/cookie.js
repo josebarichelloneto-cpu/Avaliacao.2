@@ -14,3 +14,7 @@ export function parseCookies(request) {
  
   return cookies;
 }
+
+export function buildExpiredCookie(name, sameSite) {
+  return `${name}=; Path=/; HttpOnly; Secure; SameSite=${sameSite}; Max-Age=0`;
+}
