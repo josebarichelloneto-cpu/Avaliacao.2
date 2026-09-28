@@ -1,20 +1,26 @@
-<!doctype html>
+!doctype html>
 <html lang="pt-BR">
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laboratório de autenticação</title>
-</head>
-
-<body>
-
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
     <main>
-        <h1>Laboratório de autenticação</h1>
-
-        <p id="status">
-            A sessão ainda não foi consultada.
-        </p>
+      <h1>Laboratório de autenticação</h1>
+      <p id="status">A sessão ainda não foi consultada.</p>
+ 
+      <nav id="login-links">
+        <a href="/oauth/login/google">Entrar com Google</a>
+        <a href="/oauth/login/github">Entrar com GitHub</a>
+      </nav>
+ 
+      <form id="logout-form" method="post" action="/oauth/logout" hidden>
+        <button type="submit">Sair</button>
+      </form>
     </main>
-
-</body>
+ 
+    <script src="/app.js"></script>
+  </body>
 </html>
