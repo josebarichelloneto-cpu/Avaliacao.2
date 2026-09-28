@@ -1,0 +1,1 @@
+https://avaliacao-2-ev8.pages.dev/oauth/callback/google
