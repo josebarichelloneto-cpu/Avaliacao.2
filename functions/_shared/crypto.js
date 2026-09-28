@@ -8,7 +8,7 @@ function bytesToBase64Url(bytes) {
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
     .replace(/=+$/, "");
-
+}
 export function generateRandomToken() {
   const bytes = new Uint8Array(32);
   crypto.getRandomValues(bytes);
