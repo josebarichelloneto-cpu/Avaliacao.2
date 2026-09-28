@@ -1,0 +1,2 @@
+Homepage URL: https://avaliacao-2-ev8.pages.dev
+Authorization callback URL: https://avaliacao-2-ev8.pages.dev/oauth/callback/github
