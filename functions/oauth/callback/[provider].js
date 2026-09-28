@@ -92,9 +92,8 @@ export async function onRequestGet(context) {
         providerConfig,
       });
     }
-  } catch (err) {
-    
-    return badRequest("Não foi possível confirmar a identidade");
+   } catch (err) {
+    return badRequest("Não foi possível confirmar a identidade: " + err.message);
   }
  
   
