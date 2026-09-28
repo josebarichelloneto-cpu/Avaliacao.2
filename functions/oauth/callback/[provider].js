@@ -1,2 +1,2 @@
-GET  /oauth/callback/google
-GET  /oauth/callback/github
+//GET  /oauth/callback/google
+//GET  /oauth/callback/github
