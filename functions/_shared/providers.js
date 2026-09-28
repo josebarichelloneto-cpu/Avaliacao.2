@@ -12,3 +12,6 @@ export const PROVIDERS = {
     userInfoEndpoint: "https://api.github.com/user",
   },
 };
+export function isSupportedProvider(provider) {
+  return provider === "google" || provider === "github";
+};
