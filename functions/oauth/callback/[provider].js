@@ -21,16 +21,18 @@ export async function onRequestGet(context) {
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state");
  
- 
+  
   if (errorParam || !code || !state) {
     return badRequest("Resposta de autorização inválida");
   }
+ 
  
   const cookies = parseCookies(request);
   const transactionCookieValue = cookies["__Host-oauth-tx"];
   if (!transactionCookieValue) {
     return badRequest("Cookie de transação ausente");
   }
+ 
  
   const transactionHash = await sha256Base64Url(transactionCookieValue);
   const nowInSeconds = Math.floor(Date.now() / 1000);
@@ -51,13 +53,13 @@ export async function onRequestGet(context) {
     return badRequest("Transação inválida ou expirada");
   }
  
-  
+ 
   const stateHash = await sha256Base64Url(state);
   if (stateHash !== transactionRow.state_hash) {
     return badRequest("Parâmetro state inválido");
   }
  
- 
+  
   await env.DB.prepare(`DELETE FROM oauth_transactions WHERE id_hash = ?`)
     .bind(transactionHash)
     .run();
@@ -69,7 +71,7 @@ export async function onRequestGet(context) {
     provider === "google" ? env.GOOGLE_CLIENT_SECRET : env.GITHUB_CLIENT_SECRET;
   const redirectUri = `${env.PUBLIC_BASE_URL}/oauth/callback/${provider}`;
  
-
+  
   let identity;
   try {
     if (provider === "google") {
@@ -92,8 +94,9 @@ export async function onRequestGet(context) {
         providerConfig,
       });
     }
-   } catch (err) {
-    return badRequest("Não foi possível confirmar a identidade: " + err.message);
+  } catch (err) {
+    
+    return badRequest("Não foi possível confirmar a identidade");
   }
  
   
@@ -129,6 +132,7 @@ export async function onRequestGet(context) {
  
   return new Response(null, { status: 302, headers });
 }
+ 
 
 async function confirmGoogleIdentity({
   code,
@@ -175,6 +179,7 @@ async function confirmGoogleIdentity({
   };
 }
  
+
 async function confirmGithubIdentity({
   code,
   codeVerifier,
@@ -216,6 +221,7 @@ async function confirmGithubIdentity({
       Authorization: `Bearer ${accessToken}`,
       Accept: "application/vnd.github+json",
       "X-GitHub-Api-Version": "2026-03-10",
+      "User-Agent": "oauth-pages-lab",
     },
   });
  
@@ -239,6 +245,7 @@ async function confirmGithubIdentity({
         Accept: "application/vnd.github+json",
         "X-GitHub-Api-Version": "2026-03-10",
         "Content-Type": "application/json",
+        "User-Agent": "oauth-pages-lab",
       },
       body: JSON.stringify({ access_token: accessToken }),
     }
